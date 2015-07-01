@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS</title>
+	<script type="text/javascript" src="app/component/angular.min.js"></script>
+	<script type="text/javascript" src="app/app.js"></script>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="MayTinh">
+		<input type="text" ng-model="n1"><br />
+		<input type="text" ng-model="n2"><br />
+		<select ng-model="calc">
+			<option value="1">+</option>
+			<option value="2">-</option>
+			<option value="3">*</option>
+			<option value="4">/</option>
+		</select>
+		<button ng-click="calculation()">Result</button>
+		<h1>{{result}}</h1>
+	</div>
+
+	<div ng-formlogin ng-controller="LoginController"></div>
+</body>
+</html>
