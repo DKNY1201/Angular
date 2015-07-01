@@ -37,3 +37,39 @@ myApp.directive("ngFormlogin",function(){
 		'templateUrl' : 'app/template/login_form.html'
 	}
 })
+
+myApp.directive("directiverestricta", function(){
+	return {
+		restrict: "A",
+		template: "<h1>Directive restrict A</h1>",
+	};
+})
+
+myApp.directive("directiveRestrictC", function(){
+	return {
+		restrict: "C",
+		template: "<h1>Directive restrict C</h1>",
+	};
+})
+
+myApp.directive("directiverestricte", function(){
+	return {
+		restrict: "E",
+		template: "<h1>Directive restrict E</h1>",
+	};
+})
+
+myApp.controller("MessageController",function($scope){
+	$scope.showMessage = function(){
+		alert("hello world!");
+	};
+})
+
+myApp.directive("message",function(){
+	return function(scope,element,attrs){
+		element.on("mouseenter",function(){
+			scope.$apply("showMessage()");
+			alert(attrs.title);
+		})
+	}
+})
