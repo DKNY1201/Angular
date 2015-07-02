@@ -29,9 +29,60 @@
 	<directiverestricte></directiverestricte>
 	
 	<div ng-controller="MessageController">
+		<!--
 		<div message title="DKNY">
 			Content Here
 		</div>
+
+		<newmessage title="Quy Tran">Link in Directive</newmessage>
+		-->
+		<newmessage1 show="showMessage1(messages)"></newmessage1>
+
+		<div messagetwo content="{{ctrContent}}"></div>
+
+		<loginform>
+			Username: <input type="text"> <br />
+		</loginform>
+	</div>
+
+	<div ng-controller="repeat">
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Sex</th>
+			</tr>
+			<tr ng-repeat="student in students">
+				<td>{{student.name}}</td>
+				<td>{{student.age}}</td>
+				<td>{{student.sex}}</td>
+			</tr>
+		</table>
+	</div>
+
+	<div ng-controller="HelloController">
+		<hello></hello>
+	</div>
+
+	<div ng-controller="MessageCtrl">
+		<script type="text/ng-template" id="table.html">
+			<table border="1" cellpadding="4" cellspacing="0">
+				<tr>
+					<th>name</th>
+					<th>age</th>
+				</tr>
+				<tr>
+					<td>DK</td>
+					<td>25</td>
+				</tr>
+			</table>
+		</script>
+
+		<script type="text/ng-template" id="footer.html">
+			<div style="height: 200px; background: blue; color: white">DKNY</div>
+		</script>
+		<message-dir></message-dir>
+		<footer-dir></footer-dir>
 	</div>
 </body>
 </html>
