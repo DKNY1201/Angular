@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="app/component/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module("addentry",[]);
+		app.controller('addEntryCtrl', function($scope,$http){
+			$scope.items = ['Quy','Minh','Hoa','Long'];
+			$scope.addentryto = function(){
+				$scope.items.push($scope.name);
+				$scope.name = '';
+				console.log($scope.items);
+			}
+			
+			$scope.remove = function(index){
+				$scope.items.splice(index,1);
+				console.log($scope.items);
+			}
+
+			$http.get("app/json/countries.json").success(function(data){
+				$scope.countries = data;
+			})
+		})
+
+		app.directive("formaddentry",function(){
+			return {
+				restrict : "E",
+				template : '<form ng-submit="addentryto()"><input type="text" ng-model="name"/><br />'
+					+ '<button type="submit">Add</button></form>',
+			}
+		})
+
+
+
+	</script>
+</head>
+<body ng-app="addentry" ng-controller="addEntryCtrl">
+	<ul>
+		<li ng-repeat="item in items track by $index">{{item}} <button ng-click="remove($index)">Remove</button></li>
+	</ul>
+	<formaddentry></formaddentry>
+
+	<table border="1" cellpadding="4" cellspacing="0" text-align="center">
+		<tr>
+			<th>Name</th>
+			<th>Population</th>
+		</tr>
+		<tr ng-repeat="country in countries">
+			<td>{{country.name}}</td>
+			<td>{{country.population}}</td>
+		</tr>
+	</table>
+</body>
+</html>

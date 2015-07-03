@@ -173,3 +173,67 @@ myApp.directive("footerDir", function(){
 		templateUrl: "footer.html",
 	}
 })
+
+
+
+/* 
+   ===================================== 
+   =============== ng-view =============
+   =====================================
+*/
+
+var viewApp = angular.module("viewApp",["ngRoute"]);
+
+viewApp.config(function($routeProvider){
+	$routeProvider.when('/',{
+		controller : "HomeCtrl",
+		templateUrl : "app/template/home.html" 
+	}).when('/detail',{
+		controller : "DetailCtrl",
+		templateUrl : "app/template/detail.html"
+	}).when('/product/:type/:subtype/:id',{
+		template : "Type is {{type}}, Subtype is {{subtype}}, ID is {{id}}",
+		controller : "ProductCtrl"
+	}).otherwise({
+		template: "404 error"
+	})
+});
+
+viewApp.controller("HomeCtrl", function($scope){
+	$scope.message = "This is ng-view content for homepage";
+})
+
+viewApp.controller("DetailCtrl", function($scope){
+	$scope.message = "This is ng-view content for detail page";
+})
+
+viewApp.controller("ProductCtrl",function($scope,$routeParams){
+	$scope.type = $routeParams.type;
+	$scope.subtype = $routeParams.subtype;
+	$scope.id = $routeParams.id;
+})
+
+var redirectApp = angular.module("redirect",["ngRoute"]);
+
+redirectApp.config(function($routeProvider){
+	$routeProvider.when('/',{
+		template : "home"
+	}).when('/detail/:ids',{
+		template: 'detail',
+		redirectTo: function(routeParams,path,query_string){
+			if(routeParams.id==1){
+				return '/';
+			}
+
+			if(query_string.title=="way"){
+				return '/product';
+			}
+
+			console.log(routeParams);
+			console.log(path);
+			console.log(query_string);
+		}
+	}).when('/product',{
+		template : 'Product'
+	})
+})

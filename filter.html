@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Filter</title>
+	<script type="text/javascript" src="app/component/angular.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module("filter",[]);
+		app.controller('filterCtrl', function($scope,$http){
+			$http.get("app/json/countries.json").success(function(data){
+				$scope.countries = data;
+			})
+
+			$scope.sortField = 'population';
+			$scope.reverse = true;
+		})
+	</script>
+</head>
+<body ng-app="filter" ng-controller="filterCtrl">
+	<input type="text" ng-model="search">
+	<table border="1" cellpadding="4" cellspacing="0" text-align="center">
+		<tr>
+			<th><button ng-click="sortField = 'name'; reverse=!reverse">Name</button></th>
+			<th><button ng-click="sortField = 'population'; reverse=!reverse">Population</button></th>
+		</tr>
+		<tr ng-repeat="country in countries | filter : search | orderBy:sortField:reverse">
+			<td>{{country.name}}</td>
+			<td>{{country.population}}</td>
+		</tr>
+	</table>
+</body>
+</html>
