@@ -13,10 +13,29 @@
 
 			$scope.sortField = 'population';
 			$scope.reverse = true;
+
+			$http.get("app/json/countrywithflag.json").success(function(data){
+				$scope.cwfs = data;
+			})
 		})
 	</script>
 </head>
 <body ng-app="filter" ng-controller="filterCtrl">
+	<table border="1" cellpadding="4" cellspacing="0" text-align="center">
+		<tr>
+			<th>Country</th>
+			<th>Population</th>
+			<th>Flag</th>
+			<th>GDP</th>
+		</tr>
+		<tr ng-repeat="cwf in cwfs">
+			<td>{{cwf.name}}</td>
+			<td>{{cwf.population | number}}</td>
+			<td><img ng-src="{{cwf.flag}}" width="30px"></td>
+			<td>{{cwf.GDP | currency}}</td>
+		</tr>
+	</table>
+	<hr />
 	<input type="text" ng-model="search">
 	<table border="1" cellpadding="4" cellspacing="0" text-align="center">
 		<tr>
