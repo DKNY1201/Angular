@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Route</title>
+	<script type="text/javascript" src="app/component/angular.min.js"></script>
+	<script type="text/javascript" src="app/component/angular-route.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module("routeEx",["ngRoute"]);
+		app.factory("country",function($http){
+			return{
+	 			list : function(callback){
+	 				$http.get("app/json/countrywithflag.json").success(callback);
+	 			}
+			}
+			
+		})
+		app.controller('routeExCtrl', function($scope,$http,country){
+			country.list(function(countries){
+				$scope.countries = countries;	
+			})
+		})
+
+		app.controller('routeExCtrlDetail', function($scope,$http,$routeParams){
+			$scope.name = $routeParams.countryName;
+
+			$http.get("app/json/countrywithflag.json").success(function(data){
+				$scope.country = data.filter(function(entry){
+					return entry.name === $scope.name;
+				})[0];
+			})
+		})
+
+		
+
+		app.config(function($routeProvider){
+			$routeProvider.when("/",{
+				templateUrl : 'app/template/country-list.html',
+				controller : 'routeExCtrl'
+			}).when('/:countryName',{
+				templateUrl : 'app/template/country-detail.html',
+				controller : 'routeExCtrlDetail'
+			}).otherwise({
+				redirectTo : '/'
+			})
+		})
+	</script>
+</head>
+<body ng-app="routeEx" ng-controller="routeExCtrl">
+	<div ng-view></div>
+</body>
+</html>
