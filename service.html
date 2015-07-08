@@ -2,32 +2,76 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Route</title>
+	<title>Service</title>
 	<script type="text/javascript" src="app/component/angular.min.js"></script>
 	<script type="text/javascript" src="app/component/angular-route.min.js"></script>
 	<script type="text/javascript">
 		var app = angular.module("routeEx",["ngRoute"]);
+		/*
 		app.factory("country",function($http){
+			/*
+			var cacheData;
+			function getData(callback){
+				if(cacheData){
+					callback(cacheData);
+				}else{
+					$http.get("app/json/countrywithflag.json").success(function(data){
+						cacheData = data;
+						callback(cacheData);
+					})
+				}
+			}*/
+		/*
+			function getData(callback){
+				$http({
+					method : 'GET',
+					url : 'app/json/countrywithflag.json',
+					cache : true
+				}).success(callback);
+			}
+
 			return{
-	 			list : function(callback){
-	 				$http.get("app/json/countrywithflag.json").success(callback);
+	 			list : getData,
+	 			find : function(name,callback){
+	 				getData(function(data){
+	 					var country = data.filter(function(entry){
+	 						return entry.name === name;
+	 					})[0];
+	 					callback(country);
+	 				})
+	 				
 	 			}
 			}
 			
+		})*/
+
+		app.factory("country",function($http){
+			return {
+				list : function(callback){
+					$http({
+						method : 'GET',
+						url : 'app/json/countrywithflag.json',
+						cache : true
+					}).success(callback);
+				},
+				find : function(id,callback){
+					$http({
+						method : 'GET',
+						url : 'app/json/country_' + id + '.json',
+						cache : true
+					}).success(callback);
+				}
+			}
 		})
-		app.controller('routeExCtrl', function($scope,$http,country){
+		app.controller('routeExCtrl', function($scope,country){
 			country.list(function(countries){
 				$scope.countries = countries;	
 			})
 		})
 
-		app.controller('routeExCtrlDetail', function($scope,$http,$routeParams){
-			$scope.name = $routeParams.countryName;
-
-			$http.get("app/json/countrywithflag.json").success(function(data){
-				$scope.country = data.filter(function(entry){
-					return entry.name === $scope.name;
-				})[0];
+		app.controller('routeExCtrlDetail', function($scope,$routeParams,country){
+			country.find($routeParams.countryName,function(country){
+				$scope.country = country;
 			})
 		})
 
@@ -43,6 +87,10 @@
 			}).otherwise({
 				redirectTo : '/'
 			})
+		})
+
+		app.filter("encodeURI",function(){
+			return window.encodeURI;
 		})
 	</script>
 </head>
