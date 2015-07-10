@@ -1,0 +1,33 @@
+<html ng-app="countryApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Directive</title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>
+    <script type="text/javascript" src="app/controller/countryControllers.js"></script>
+    <script type="text/javascript" src="app/service/countriesService.js"></script>
+    <script type="text/javascript" src="app/directive/datnuocDirective.js"></script>
+    <script>
+      var countryApp = angular.module('countryApp', ['ngRoute','countryControllers','countryService','datnuocDirective']);
+
+      countryApp.config(function($routeProvider) {
+        $routeProvider.
+          when('/', {
+            templateUrl: 'app/template/country-list.html',
+            controller: 'CountryListCtrl'
+          }).
+          when('/:countryId', {
+            templateUrl: 'app/template/country-detail.html',
+            controller: 'CountryDetailCtrl'
+          }).
+          otherwise({
+            redirectTo: '/'
+          });
+      });
+
+    </script>
+  </head>
+  <body>
+    <div ng-view></div>
+  </body>
+</html>
