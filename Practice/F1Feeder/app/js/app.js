@@ -1,0 +1,1 @@
+var F1FeederApp = angular.module('F1FeederApp',['ngRoute','F1FeederApp.controllers','F1FeederApp.services']);
