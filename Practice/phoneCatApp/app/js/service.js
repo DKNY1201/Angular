@@ -3,14 +3,14 @@ angular.module('phoneCatService',[])
 		var phoneCatAPI = {};
 
 		phoneCatAPI.getPhones = function(){
-			$http({
+			return $http({
 				url : 'phones/phones.json',
 				cache : 'true',
 			})
 		}
 
 		phoneCatAPI.getPhone = function(phoneId){
-			$http({
+			return $http({
 				url : 'phones/' + phoneId + '.json',
 				cache : 'true',
 			})

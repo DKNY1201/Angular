@@ -20,8 +20,8 @@ angular.module("phoneCatController",[])
 			
 		})
 
-		$scope.changeMainImg = function(imgUrl){
-			$scope.mainImg = imgUrl;
-		}
+		$scope.setImage = function(imageUrl) {
+	      $scope.mainImageUrl = imageUrl;
+	    };
 
 	})
