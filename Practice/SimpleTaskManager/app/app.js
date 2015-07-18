@@ -1,6 +1,6 @@
 'use strict';
 
-var STMApp = angular.module("STMApp",['ngRoute','STMCtrl','STMService']);
+var STMApp = angular.module("STMApp",['ngRoute','STMCtrl','STMService','STMDirective']);
 
 STMApp.config(function($routeProvider){
 	$routeProvider.when('/tasks',{
