@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Text to URL</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+<body ng-app="URLApp">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<input class="" ng-model="textToFilter" /><br /><br />
+				<a href="{{textToFilter | urlFilter}}">{{textToFilter | urlFilter}}</a>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+	<script type="text/javascript" src="app/app.js"></script>
+</body>
+</html>
