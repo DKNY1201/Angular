@@ -1,0 +1,51 @@
+<div class="main-content">
+	<div class="container">
+		<div class="header jumbotron">
+			<div class="row">
+				<div class="col-xs-12">
+					<h1>Simple Task Manager Application using AngularJS</h1>	
+				</div>
+			</div>	
+		</div><!-- /.header -->
+		<div class="main-app">
+			<div class="top-app">
+				<div class="row">
+					<div class="col-md-6 col-sm-12 col-xs-12 sub-name">
+						<i class="glyphicon glyphicon-th"></i>
+						<span>Task manager</span>
+					</div>
+					<div class="col-md-6 col-sm-12 col-xs-12">
+						<button class="btn btn-danger" ng-click="addNewTask=!addNewTask;"><i class="glyphicon glyphicon-plus"></i> Add new task</button>
+						<input type="text" class="form-control pull-right search-task" placeholder="Search tasks ..." ng-model="searchText">
+					</div>
+				</div>		
+			</div><!-- /.top-app -->
+			<div class="body-app">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="input-group" ng-init="addNewTask = false;" ng-if="addNewTask">
+							<input type="text" class="form-control" placeholder="Type your task name" ng-model="taskName" ng-focus="addNewTask" enter-submit="addTask(taskName)">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" ng-click="addTask(taskName)"><i class="glyphicon glyphicon-plus"></i> Add task</button>
+							</span>
+						</div><!-- /input-group -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<ul class="task-list">
+							<li ng-repeat="task in tasks | filter:searchText">
+								<label ng-click="toggleTask(task.id,task.status)">
+									<input type="checkbox" ng-checked="task.status==1" value="{{task.status}}">
+									<span ng-class="{strike:task.status==1}">{{task.task}} [{{task.id}}]</span>	
+								</label>
+								
+								<i class="glyphicon glyphicon-trash pull-right" ng-click="delTask(task.id)"></i>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div><!-- /.body-app -->
+		</div><!-- /.main-app -->
+	</div>
+</div><!-- /.main-content -->
