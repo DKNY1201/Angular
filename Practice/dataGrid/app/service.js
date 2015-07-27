@@ -1,30 +1,14 @@
 'use strict';
 
-angular.module('STMService',[])
-	.factory('STMAPI',function($http){
-		var STMAPI = {};
-		STMAPI.getTasks = function(){
+angular.module('gridService',[])
+	.factory('gridAPI',function($http){
+		var gridAPI = {};
+		gridAPI.getCustomers = function(){
 			return $http({
-				url : 'ajax/getTasks.php',
+				url : 'ajax/getCustomer.php',
 				cache : 'true'
 			})
 		}
-		/*
-		STMAPI.addTask = function(task){
-			return $http({
-				method : 'POST',
-				url : 'ajax/addTask.php',
-				params: {
-                    task: task
-                },
-				data: {
-                	task: task
-                }
-			})
-		}*/
 
-		STMAPI.addTask = function(task){
-			return $http.post("ajax/addTask.php?task=" + task);
-		}
-		return STMAPI;
+		return gridAPI;
 	})

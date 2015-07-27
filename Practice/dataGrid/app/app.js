@@ -1,12 +1,12 @@
 'use strict';
 
-var STMApp = angular.module("STMApp",['ngRoute','STMCtrl','STMService','STMDirective']);
+var gridApp = angular.module("gridApp",['ngRoute','ui.bootstrap','gridCtrl','gridService']);
 
-STMApp.config(function($routeProvider){
-	$routeProvider.when('/tasks',{
-		templateUrl : 'partials/tasks.html',
-		controller : 'STMMainCtrl'
+gridApp.config(function($routeProvider){
+	$routeProvider.when('/customers',{
+		templateUrl : 'partials/customers.html',
+		controller : 'gridMainCtrl'
 	}).otherwise({
-		redirectTo : '/tasks'
+		redirectTo : '/customers'
 	})
 })
