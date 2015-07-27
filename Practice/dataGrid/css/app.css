@@ -1,0 +1,59 @@
+.header{
+    color: seagreen;
+;
+}
+.top-app{
+	background-color: #307ECC;
+	height: 50px;
+	color: #fff;
+	line-height: 50px;
+	padding: 0 20px;
+}
+
+.top-app .search-task{
+	width: 50%;
+	margin-top: 8px;
+}
+
+.top-app .sub-name{
+	text-transform: uppercase;
+	font-size: 16px;
+}
+
+.body-app{
+	border: 1px solid #307ECC;
+	border-top: none;
+	padding: 10px;
+}
+
+.body-app .task-list{
+	padding: 0;
+}
+
+.body-app .task-list li{
+	display: block;
+	list-style: none;
+	padding: 5px 10px;
+	border: 1px solid #ccc;
+	border-left: 2px solid #bbb;
+	width: 100%;
+	margin: 5px 0;
+}
+
+.body-app .task-list li i{
+	color: #E1704B;
+	cursor: pointer;
+	transition: 0.3s all ease;
+	-moz-transition: 0.3s all ease;
+	-webkit-transition: 0.3s all ease;
+	-ms-transition: 0.3s all ease;
+	-o-transition: 0.3s all ease;
+}
+
+.body-app .task-list li i:hover{
+	color: #307ECC;
+}
+
+.strike{
+	text-decoration: line-through;
+}
