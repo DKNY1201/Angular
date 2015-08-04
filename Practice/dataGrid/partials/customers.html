@@ -1,5 +1,35 @@
-<ul>
-	<li ng-repeat="list in customerLists">
-		{{list.customerName}}
-	</li>
-</ul>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2">
+			PageSize:
+			<select ng-model="entryLimit" class="form-control">
+				<option>5</option>
+				<option>10</option>
+				<option>20</option>
+				<option>50</option>
+				<option>100</option>
+			</select>
+		</div>
+		<div class="col-md-3">
+			Filter:
+			<input type="text" class="form-control" ng-model="filterText">
+		</div>
+		<div class="col-md-7">
+			<h5>Filtered {{}} of {{customerLists.length}} total customer</h5>
+		</div>
+	</div>
+
+	<div class="row">
+		<table class="table table-striped table-bordered">
+			<thead>
+				<th>Customer name </th>
+				<th>Address </th>
+				<th>City </th>
+				<th>State</th>
+				<th>Postal code </th>
+				<th>Country</th>
+				<th>Credit limit</th>
+			</thead>
+		</table>
+	</div>
+</div>
