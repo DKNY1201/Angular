@@ -3,7 +3,7 @@
 		<div class="col-md-2">
 			PageSize:
 			<select ng-model="entryLimit" class="form-control">
-				<option>5</option>
+				<option selected="selected">5</option>
 				<option>10</option>
 				<option>20</option>
 				<option>50</option>
@@ -12,24 +12,47 @@
 		</div>
 		<div class="col-md-3">
 			Filter:
-			<input type="text" class="form-control" ng-model="filterText">
+			<input type="text" class="form-control" ng-model="filterText" ng-change="filter()" placeholder="Filter Text">
 		</div>
 		<div class="col-md-7">
-			<h5>Filtered {{}} of {{customerLists.length}} total customer</h5>
+			<h5>Filtered {{filteredItems}} of {{totalItems}} total customer</h5>
+		</div>
+	</div>
+	{{currentPage}}
+	<br />
+	<div class="row" ng-show="filteredItems > 0">
+		<table class="table table-striped table-bordered">
+			<thead>
+				<th>Customer name <a ng-click="sort_by('customerName')"><i class="glyphicon glyphicon-sort"></i></a></th>
+				<th>Address <a ng-click="sort_by('addressLine1')"><i class="glyphicon glyphicon-sort"></i></a></th>
+				<th>City <a ng-click="sort_by('city')"><i class="glyphicon glyphicon-sort"></i></a></th>
+				<th>State <a ng-click="sort_by('state')"><i class="glyphicon glyphicon-sort"></i></a></th>
+				<th>Postal code <a ng-click="sort_by('postalCode')"><i class="glyphicon glyphicon-sort"></i></a></th>
+				<th>Country <a ng-click="sort_by('country')"><i class="glyphicon glyphicon-sort"></i></a></th>
+				<th>Credit limit <a ng-click="sort_by('creditLimit')"><i class="glyphicon glyphicon-sort"></i></a></th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="data in filtered = (list | filter:filterText | orderBy : predicate : reverse) | startFrom: (currentPage - 1) * entryLimit | limitTo: entryLimit">
+					<td>{{data.customerName}}</td>
+					<td>{{data.addressLine1}}</td>
+					<td>{{data.city}}</td>
+					<td>{{data.state}}</td>
+					<td>{{data.postalCode}}</td>
+					<td>{{data.country}}</td>
+					<td>{{data.creditLimit}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row" ng-show="filteredItems == 0">
+		<div class="col-md-12">
+			<h1>No record found</h1>
 		</div>
 	</div>
 
-	<div class="row">
-		<table class="table table-striped table-bordered">
-			<thead>
-				<th>Customer name </th>
-				<th>Address </th>
-				<th>City </th>
-				<th>State</th>
-				<th>Postal code </th>
-				<th>Country</th>
-				<th>Credit limit</th>
-			</thead>
-		</table>
+	<div class="row" ng-show="filteredItems > 0">
+		<div class="col-md-12">
+			<pagination boundary-links="true" total-items="filteredItems" page="currentPage" items-per-page="entryLimit" previous-text="&laquo;" next-text="&raquo;"></pagination>
+		</div>
 	</div>
 </div>
