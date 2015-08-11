@@ -1,0 +1,32 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<a href="#/edit-customer/0" class="btn btn-success btn-lg btn-add-customer"><span class="glyphicon glyphicon-plus"></span> Add new Customer</a>
+		</div>
+		<table class="table table-stripped table-bordered" ng-show="customers.length > 0">
+			<thead>
+				<tr>
+					<th>Customer Name</th>
+					<th>Email</th>
+					<th>Address</th>
+					<th>City</th>
+					<th>Country</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="customer in customers">
+					<td>{{customer.customerName}}</td>
+					<td>{{customer.email}}</td>
+					<td>{{customer.address}}</td>
+					<td>{{customer.city}}</td>
+					<td>{{customer.country}}</td>
+					<td><a href="#/edit-customer/{{customer.customerNumber}}" class="btn"><span class="glyphicon glyphicon-edit"></span> Edit customer</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="col-md-12" ng-show="customers.length == 0">
+			<h1>Customers not found</h1>
+		</div>
+	</div>
+</div>

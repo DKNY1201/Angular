@@ -27,14 +27,27 @@
 			}
 		}
 
-		function customers(){
-			$sql = "SELECT * FROM angularcode_customers";
-			$re = mysql_query($sql) or die(mysql_error());
-			$customer_arr = [];
-			while ($row_re = mysql_fetch_assoc($re)) {
-				array_push($customer_arr, $row_re);
+		public function customers(){
+			if($this->get_request_method()!="GET"){
+				$this->response('',406);
 			}
-			var_dump($customer_arr);
+			$sql = "SELECT * FROM angularcode_customers ORDER BY customerNumber";
+			$re = mysql_query($sql) or die(mysql_error());
+			$num_row = mysql_num_rows($re);
+			if($num_row > 0){
+				$customer_arr = [];
+				while ($row_re = mysql_fetch_assoc($re)) {
+					array_push($customer_arr, $row_re);
+				}
+				$this->response($this->json($customer_arr),200);
+			}
+			$this->response('',204);
+		}
+
+		private function json($data){
+			if(is_array($data)){
+				return json_encode($data);
+			}
 		}
 	}
 
