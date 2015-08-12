@@ -4,4 +4,6 @@ angular.module('customerManagerCtrl',[])
 		customerManageAPI.getCustomers().then(function(response){
 			$scope.customers = response.data;
 		})
+	}).controller('editCtrl',function($scope,$rootScope,$location,$routeParams,customerManageAPI,customer){
+		$scope.customer = customer.data;
 	})

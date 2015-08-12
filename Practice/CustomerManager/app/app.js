@@ -9,8 +9,11 @@ myApp.config(['$routeProvider',function($routeProvider){
 		title : 'Edit Customer',
 		templateUrl : 'partials/edit-customer.html',
 		controller : 'editCtrl',
-		resolve : function(){
-
+		resolve : {
+			customer : function(customerManageAPI,$route){
+				var customerID = $route.current.params.customerID;
+				return customerManageAPI.getCustomer(customerID);
+			}
 		}
 	}).otherwise({
 		redirectTo : '/customers'

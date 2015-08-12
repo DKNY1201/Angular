@@ -44,6 +44,23 @@
 			$this->response('',204);
 		}
 
+		public function customer(){
+			if($this->get_request_method()!="GET"){
+				$this->response('',406);
+			}
+			$id = (int)$this->_request['customerID'];
+			if($id > 0){
+				$sql = "SELECT * FROM angularcode_customers WHERE customerNumber = $id";
+				$re = mysql_query($sql) or die(mysql_error());
+				$num_row = mysql_num_rows($re);
+				if($num_row > 0){
+					$row_re = mysql_fetch_assoc($re);
+					$this->response($this->json($row_re),200);
+				}
+			}
+			$this->response('',204);
+		}
+
 		private function json($data){
 			if(is_array($data)){
 				return json_encode($data);
