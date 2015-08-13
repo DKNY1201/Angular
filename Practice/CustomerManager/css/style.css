@@ -1,3 +1,15 @@
 .btn-add-customer{
 	margin: 20px 0;
 }
+
+.form-horizontal input.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+
+.form-horizontal input.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+
+.help-inline{
+	color: #900;
+}
